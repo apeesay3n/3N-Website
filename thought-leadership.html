@@ -1,180 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meet Our Team - 3N Consulting</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Meet Our Team - 3N Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.7rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 48rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .team-card {
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(56,189,248,0.15);
+    }
+
+    .team-card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .team-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #020617;
+    }
+
+    .team-card p {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .team-section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #020617;
+    }
+
+    .team-section-subtitle {
+      text-align: center;
+      color: #4b5563;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .team-section {
+      margin-bottom: 3rem;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid #38bdf8;
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .cta-box h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #020617;
+      margin-bottom: 1rem;
+    }
+
+    .cta-box p {
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+    .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 3rem 1.5rem 2rem; }
+      .section { padding: 2rem 1.5rem; }
+      .team-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation Header -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <img src="images/3nlogo.png" alt="3N Consulting Logo" class="logo-img">
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Service Lines</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="thought-leadership.html">Meet Our Team</a></li>
-                    <li><a href="toolkit.html">Our Toolkit</a></li>
-                    <li><a href="disclaimers.html">Disclaimers</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html" class="active">Meet Our Team</a>
+        <a href="toolkit.html">Our Toolkit</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Our Team</h1>
-            <p>Meet the experienced consultants and industry leaders behind 3N Consulting.</p>
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-eyebrow">Our Leadership & Expertise</div>
+          <h1 class="hero-title">Our Team</h1>
+          <p class="hero-body">
+            Meet the experienced consultants and industry leaders behind 3N Consulting.
+          </p>
         </div>
+      </div>
     </section>
 
-    <!-- Thought Leadership Content -->
-    <section class="thought-leadership-section">
-        <div class="container">
-            <!-- Board Members Section -->
-            <div style="margin-bottom: 3rem;">
-                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem; font-weight: 700;">Board Members</h2>
-                <p style="text-align: center; color: #4b5563; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Leadership and vision from our board of directors.</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                    <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04);">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Nick Sickler</h3>
-                        <p style="font-size: 0.9rem; color: #6b7280;">Board Member</p>
-                    </div>
-                    
-                    <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04);">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Marc Hochman</h3>
-                        <p style="font-size: 0.9rem; color: #6b7280;">Board Member</p>
-                    </div>
-                    
-                    <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04);">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">David Mann</h3>
-                        <p style="font-size: 0.9rem; color: #6b7280;">Board Member</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-bottom: 3rem;">
-                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem; font-weight: 700;">Our Thought Leaders</h2>
-                <p style="text-align: center; color: #4b5563; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Explore insights and perspectives from our team of experienced consultants and industry experts.</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                    <a href="rachel-demuth.html" style="text-decoration: none; color: inherit;">
-                        <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04); transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Rachel DeMuth</h3>
-                            <p style="font-size: 0.9rem; color: #6b7280;">View Insights →</p>
-                        </div>
-                    </a>
-                    
-                    <a href="nick-gupta.html" style="text-decoration: none; color: inherit;">
-                        <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04); transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Nick Gupta</h3>
-                            <p style="font-size: 0.9rem; color: #6b7280;">View Insights →</p>
-                        </div>
-                    </a>
-                    
-                    <a href="dyan-sellers.html" style="text-decoration: none; color: inherit;">
-                        <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04); transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Dyan Sellers</h3>
-                            <p style="font-size: 0.9rem; color: #6b7280;">View Profile →</p>
-                        </div>
-                    </a>
-                    
-                    <a href="david-hochman.html" style="text-decoration: none; color: inherit;">
-                        <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04); transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">David Hochman</h3>
-                            <p style="font-size: 0.9rem; color: #6b7280;">View Insights →</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Featured Team Members Section -->
-            <div style="margin-bottom: 3rem;">
-                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem; font-weight: 700;">Featured Team Members</h2>
-                <p style="text-align: center; color: #4b5563; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Discover more about our talented consulting professionals and their expertise.</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                    <a href="soorya-rajendran.html" style="text-decoration: none; color: inherit;">
-                        <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04); transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Soorya Rajendran</h3>
-                            <p style="font-size: 0.9rem; color: #6b7280;">View Profile →</p>
-                        </div>
-                    </a>
-                    
-                    <a href="anirudh-peesay.html" style="text-decoration: none; color: inherit;">
-                        <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04); transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Anirudh (Anu) Peesay</h3>
-                            <p style="font-size: 0.9rem; color: #6b7280;">View Profile →</p>
-                        </div>
-                    </a>
-                    
-                    <a href="dhatri-mulpuri.html" style="text-decoration: none; color: inherit;">
-                        <div style="border-radius: 1rem; border: 1px solid #e5e7eb; background: #ffffff; padding: 2rem; text-align: center; box-shadow: 0 12px 30px rgba(15,23,42,0.04); transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">👤</div>
-                            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Dhatri Mulpuri</h3>
-                            <p style="font-size: 0.9rem; color: #6b7280;">View Profile →</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="upload-section">
-                <h2>Submit an Article</h2>
-                <p>Have insights to share? We're always looking for thoughtful perspectives on consulting, business strategy, and organizational transformation.</p>
-                <p><a href="mailto:info@3nconsultinggroup.com" class="cta-button">Submit Your Article</a></p>
-            </div>
+    <!-- BOARD MEMBERS -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <h2 class="team-section-title">Board Members</h2>
+        <p class="team-section-subtitle">Leadership and vision from our board of directors.</p>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-card-icon">👤</div>
+            <h3>Nick Sickler</h3>
+            <p>Board Member</p>
+          </div>
+          
+          <div class="team-card">
+            <div class="team-card-icon">👤</div>
+            <h3>Marc Hochman</h3>
+            <p>Board Member</p>
+          </div>
+          
+          <div class="team-card">
+            <div class="team-card-icon">👤</div>
+            <h3>David Mann</h3>
+            <p>Board Member</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About 3N Consulting</h4>
-                    <p><strong>Results. Delivered.</strong></p>
-                    <p>Execution-focused consulting measured on outcomes.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Information</h4>
-                    <p>📞 (301) 723-7057</p>
-                    <p>📍 6710A Rockledge Drive<br>Bethesda, MD 20817</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="toolkit.html">Our Toolkit</a></li>
-                        <li><a href="disclaimers.html">Disclaimers</a></li>
-                    </ul>
-                </div>
+    <!-- THOUGHT LEADERS -->
+    <section class="section">
+      <div class="section-inner">
+        <h2 class="team-section-title">Our Thought Leaders</h2>
+        <p class="team-section-subtitle">Explore insights and perspectives from our team of experienced consultants and industry experts.</p>
+        <div class="team-grid">
+          <a href="rachel-demuth.html" style="text-decoration: none; color: inherit;">
+            <div class="team-card">
+              <div class="team-card-icon">👤</div>
+              <h3>Rachel DeMuth</h3>
+              <p>View Insights →</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 3N Consulting. All rights reserved.</p>
+          </a>
+          
+          <a href="nick-gupta.html" style="text-decoration: none; color: inherit;">
+            <div class="team-card">
+              <div class="team-card-icon">👤</div>
+              <h3>Nick Gupta</h3>
+              <p>View Insights →</p>
             </div>
+          </a>
+          
+          <a href="dyan-sellers.html" style="text-decoration: none; color: inherit;">
+            <div class="team-card">
+              <div class="team-card-icon">👤</div>
+              <h3>Dyan Sellers</h3>
+              <p>View Profile →</p>
+            </div>
+          </a>
+          
+          <a href="david-hochman.html" style="text-decoration: none; color: inherit;">
+            <div class="team-card">
+              <div class="team-card-icon">👤</div>
+              <h3>David Hochman</h3>
+              <p>View Insights →</p>
+            </div>
+          </a>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- FEATURED TEAM MEMBERS -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <h2 class="team-section-title">Featured Team Members</h2>
+        <p class="team-section-subtitle">Discover more about our talented consulting professionals and their expertise.</p>
+        <div class="team-grid">
+          <a href="soorya-rajendran.html" style="text-decoration: none; color: inherit;">
+            <div class="team-card">
+              <div class="team-card-icon">👤</div>
+              <h3>Soorya Rajendran</h3>
+              <p>View Profile →</p>
+            </div>
+          </a>
+          
+          <a href="anirudh-peesay.html" style="text-decoration: none; color: inherit;">
+            <div class="team-card">
+              <div class="team-card-icon">👤</div>
+              <h3>Anirudh (Anu) Peesay</h3>
+              <p>View Profile →</p>
+            </div>
+          </a>
+          
+          <a href="dhatri-mulpuri.html" style="text-decoration: none; color: inherit;">
+            <div class="team-card">
+              <div class="team-card-icon">👤</div>
+              <h3>Dhatri Mulpuri</h3>
+              <p>View Profile →</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBMIT ARTICLE CTA -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="cta-box">
+          <h3>Submit an Article</h3>
+          <p>Have insights to share? We're always looking for thoughtful perspectives on consulting, business strategy, and organizational transformation.</p>
+          <a href="mailto:info@3nconsultinggroup.com" class="btn btn-primary">Submit Your Article →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div style="flex: 1; min-width: 200px;">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">3N Consulting</div>
+        <p style="color: #6b7280;">Results. Delivered.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="thought-leadership.html">Meet Our Team</a>
+        <a href="toolkit.html">Our Toolkit</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb; color: #9ca3af;">
+      <p>&copy; 2024 3N Consulting. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

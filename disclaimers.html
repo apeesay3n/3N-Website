@@ -1,110 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disclaimers - 3N Consulting</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Disclaimers - 3N Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.7rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 48rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    
+    .disclaimer-content {
+      color: #4b5563;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      max-width: 900px;
+    }
+
+    .disclaimer-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #020617;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .disclaimer-content h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #020617;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .disclaimer-content p {
+      margin-bottom: 1rem;
+      color: #4b5563;
+    }
+
+    .disclaimer-content a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .disclaimer-content a:hover {
+      text-decoration: underline;
+    }
+
+    .date-badge {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #38bdf8;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: #0369a1;
+      font-weight: 500;
+    }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 3rem 1.5rem 2rem; }
+      .section { padding: 2rem 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation Header -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <img src="images/3nlogo.png" alt="3N Consulting Logo" class="logo-img">
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Service Lines</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="thought-leadership.html">Meet Our Team</a></li>
-                    <li><a href="toolkit.html">Our Toolkit</a></li>
-                    <li><a href="disclaimers.html">Disclaimers</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html">Meet Our Team</a>
+        <a href="toolkit.html">Our Toolkit</a>
+        <a href="disclaimers.html" class="active">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Disclaimers</h1>
-            <p>Last Updated: <span id="updateDate"></span></p>
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-eyebrow">Legal Information</div>
+          <h1 class="hero-title">Disclaimers</h1>
+          <p class="hero-body">
+            Last Updated: <span class="date-badge" id="updateDate"></span>
+          </p>
         </div>
+      </div>
     </section>
 
-    <!-- Disclaimers Content -->
-    <section class="disclaimers-section">
-        <div class="container">
-            <div class="disclaimer-content">
-                <h2>Legal Disclaimers</h2>
+    <!-- DISCLAIMERS CONTENT -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="disclaimer-content">
+          <h2>Legal Disclaimers</h2>
 
-                <h3>General Information</h3>
-                <p>The information provided on this website is for general informational purposes only. While 3N Consulting ("3N") strives to ensure that all information presented is accurate and up to date, no representation or warranty, express or implied, is made as to its completeness, accuracy, reliability, or suitability. Visitors use all information at their own risk.</p>
+          <h3>General Information</h3>
+          <p>The information provided on this website is for general informational purposes only. While 3N Consulting ("3N") strives to ensure that all information presented is accurate and up to date, no representation or warranty, express or implied, is made as to its completeness, accuracy, reliability, or suitability. Visitors use all information at their own risk.</p>
 
-                <h3>No Professional Advice</h3>
-                <p>Content on this site—including case studies, examples, or publications—does not constitute professional, legal, accounting, or consulting advice. Visitors should not act on information contained herein without obtaining appropriate professional counsel specific to their situation.</p>
+          <h3>No Professional Advice</h3>
+          <p>Content on this site—including case studies, examples, or publications—does not constitute professional, legal, accounting, or consulting advice. Visitors should not act on information contained herein without obtaining appropriate professional counsel specific to their situation.</p>
 
-                <h3>Engagement of Services</h3>
-                <p>Viewing this website or contacting 3N Consulting through it does not create a client relationship. A formal written agreement signed by both parties is required before 3N Consulting undertakes any professional engagement.</p>
+          <h3>Engagement of Services</h3>
+          <p>Viewing this website or contacting 3N Consulting through it does not create a client relationship. A formal written agreement signed by both parties is required before 3N Consulting undertakes any professional engagement.</p>
 
-                <h3>Third-Party Links</h3>
-                <p>This site may contain links to third-party websites. 3N Consulting does not control or endorse the content, accuracy, or policies of these external sites and is not responsible for any losses or damages arising from their use.</p>
+          <h3>Third-Party Links</h3>
+          <p>This site may contain links to third-party websites. 3N Consulting does not control or endorse the content, accuracy, or policies of these external sites and is not responsible for any losses or damages arising from their use.</p>
 
-                <h3>Intellectual Property</h3>
-                <p>All content—including but not limited to text, graphics, logos, and documents—is the intellectual property of 3N Consulting unless otherwise stated. Reproduction or redistribution without prior written consent is strictly prohibited.</p>
+          <h3>Intellectual Property</h3>
+          <p>All content—including but not limited to text, graphics, logos, and documents—is the intellectual property of 3N Consulting unless otherwise stated. Reproduction or redistribution without prior written consent is strictly prohibited.</p>
 
-                <h3>Limitation of Liability</h3>
-                <p>In no event shall 3N Consulting, its officers, employees, or affiliates be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of access to or use of this website.</p>
+          <h3>Limitation of Liability</h3>
+          <p>In no event shall 3N Consulting, its officers, employees, or affiliates be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of access to or use of this website.</p>
 
-                <h3>Community Commitment</h3>
-                <p>3N Consulting is proud to serve public agencies and educational institutions in Maryland and beyond. References to past performance or client results are illustrative of experience only and do not guarantee future outcomes.</p>
+          <h3>Community Commitment</h3>
+          <p>3N Consulting is proud to serve public agencies and educational institutions in Maryland and beyond. References to past performance or client results are illustrative of experience only and do not guarantee future outcomes.</p>
 
-                <h3>Contact</h3>
-                <p>For questions regarding this disclaimer, please contact: <a href="mailto:info@3nconsultinggroup.com">info@3nconsultinggroup.com</a></p>
-            </div>
+          <h3>Contact</h3>
+          <p>For questions regarding this disclaimer, please contact: <a href="mailto:info@3nconsultinggroup.com">info@3nconsultinggroup.com</a></p>
         </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About 3N Consulting</h4>
-                    <p><strong>Results. Delivered.</strong></p>
-                    <p>Execution-focused consulting measured on outcomes.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Information</h4>
-                    <p>📞 (301) 723-7057</p>
-                    <p>📍 6710A Rockledge Drive<br>Bethesda, MD 20817</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="disclaimers.html">Disclaimers</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 3N Consulting. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div style="flex: 1; min-width: 200px;">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">3N Consulting</div>
+        <p style="color: #6b7280;">Results. Delivered.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="thought-leadership.html">Meet Our Team</a>
+        <a href="toolkit.html">Our Toolkit</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb; color: #9ca3af;">
+      <p>&copy; 2024 3N Consulting. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
 
-    <script src="script.js"></script>
-    <script>
-        // Set the current date in disclaimers
-        const today = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('updateDate').textContent = today.toLocaleDateString('en-US', options);
-    </script>
+<script src="script.js"></script>
+<script>
+  // Set the current date in disclaimers
+  const today = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('updateDate').textContent = today.toLocaleDateString('en-US', options);
+</script>
 </body>
 </html>

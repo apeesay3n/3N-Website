@@ -1,106 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - 3N Consulting</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>About Us - 3N Consulting | Results. Delivered.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.7rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 48rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-header { margin-bottom: 2rem; }
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      color: #4b5563;
+      max-width: 48rem;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-block {
+      color: #4b5563;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .content-block h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .value-box {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.04);
+    }
+
+    .value-box h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #020617;
+      margin-bottom: 0.5rem;
+    }
+
+    .value-box p {
+      font-size: 0.95rem;
+      color: #6b7280;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 2rem;
+      background: #f3f4f6;
+      border-radius: 1rem;
+      margin-top: 3rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+    .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 3rem 1.5rem 2rem; }
+      .section { padding: 2rem 1.5rem; }
+      .values-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation Header -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <img src="images/3nlogo.png" alt="3N Consulting Logo" class="logo-img">
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Service Lines</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="thought-leadership.html">Meet Our Team</a></li>
-                    <li><a href="toolkit.html">Our Toolkit</a></li>
-                    <li><a href="disclaimers.html">Disclaimers</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html">Meet Our Team</a>
+        <a href="toolkit.html">Our Toolkit</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>About 3N Consulting</h1>
-            <p>Results. Delivered. Execution-focused consulting measured on outcomes.</p>
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-eyebrow">About 3N Consulting</div>
+          <h1 class="hero-title">Results. Delivered.</h1>
+          <p class="hero-body">
+            Execution-focused consulting measured on outcomes. We build long-term partnerships, take ownership of outcomes, and practice frugality so savings flow to clients.
+          </p>
         </div>
+      </div>
     </section>
 
-    <!-- About Content -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-content">
-                <h2>Our Mission</h2>
-                <p>3N Consulting is dedicated to delivering measurable results through execution-focused consulting. We build long-term partnerships with our clients, take ownership of outcomes, and practice frugality to ensure savings flow directly to our clients.</p>
-
-                <h2>Our Values</h2>
-                <div class="values-grid">
-                    <div class="value-box">
-                        <h3>Integrity</h3>
-                        <p>We maintain the highest standards of integrity in all our dealings, ensuring transparency and honesty in every engagement.</p>
-                    </div>
-                    <div class="value-box">
-                        <h3>Client-Centric</h3>
-                        <p>Our clients are at the heart of everything we do. We invest in understanding their challenges and delivering tailored solutions.</p>
-                    </div>
-                    <div class="value-box">
-                        <h3>Results-Oriented</h3>
-                        <p>We are committed to delivering tangible, measurable results that drive real business impact.</p>
-                    </div>
-                    <div class="value-box">
-                        <h3>Ownership</h3>
-                        <p>We don't just staff projects—we own the results and keep our commitments, every time.</p>
-                    </div>
-                </div>
-
-                <h2>Who We Are</h2>
-                <p>3N Consulting is a Maryland-based certified Minority Business Enterprise (MBE) in the Small Business Reserve (SBR) program and an NMSDC certified MBE. With extensive experience serving public agencies, educational institutions, and private sector organizations, we bring deep expertise in organizational redesign, strategy & operations, data analytics, digital transformation, and human capital management.</p>
-
-                <h2>Our Approach</h2>
-                <p>We combine strategic thinking with operational excellence to deliver sustainable change. Our team consists of experienced consultants who understand the complexities of modern business and are committed to helping organizations navigate challenges and seize opportunities.</p>
-            </div>
+    <!-- OUR MISSION -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Our Mission</h2>
         </div>
+        <div class="content-block">
+          <p>
+            3N Consulting is dedicated to delivering measurable results through execution-focused consulting. We build long-term partnerships with our clients, take ownership of outcomes, and practice frugality to ensure savings flow directly to our clients.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About 3N Consulting</h4>
-                    <p><strong>Results. Delivered.</strong></p>
-                    <p>Execution-focused consulting measured on outcomes.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Information</h4>
-                    <p>📞 (301) 723-7057</p>
-                    <p>📍 6710A Rockledge Drive<br>Bethesda, MD 20817</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 3N Consulting. All rights reserved.</p>
-            </div>
+    <!-- OUR VALUES -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Our Values</h2>
+          <p class="section-subtitle">The principles that guide everything we do</p>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <div class="values-grid">
+          <div class="value-box">
+            <h4>Integrity</h4>
+            <p>We maintain the highest standards of integrity in all our dealings, ensuring transparency and honesty in every engagement.</p>
+          </div>
+          <div class="value-box">
+            <h4>Client-Centric</h4>
+            <p>Our clients are at the heart of everything we do. We invest in understanding their challenges and delivering tailored solutions.</p>
+          </div>
+          <div class="value-box">
+            <h4>Results-Oriented</h4>
+            <p>We are committed to delivering tangible, measurable results that drive real business impact.</p>
+          </div>
+          <div class="value-box">
+            <h4>Ownership</h4>
+            <p>We don't just staff projects—we own the results and keep our commitments, every time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO WE ARE -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Who We Are</h2>
+        </div>
+        <div class="content-block">
+          <p>
+            3N Consulting is a Maryland-based certified Minority Business Enterprise (MBE) in the Small Business Reserve (SBR) program and an NMSDC certified MBE. With extensive experience serving public agencies, educational institutions, and private sector organizations, we bring deep expertise in organizational redesign, strategy & operations, data analytics, digital transformation, and human capital management.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR APPROACH -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Our Approach</h2>
+        </div>
+        <div class="content-block">
+          <p>
+            We combine strategic thinking with operational excellence to deliver sustainable change. Our team consists of experienced consultants who understand the complexities of modern business and are committed to helping organizations navigate challenges and seize opportunities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="cta-section">
+          <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Ready to Work with Us?</h3>
+          <p style="margin-bottom: 1.5rem; color: #4b5563;">Let's discuss how 3N Consulting can help your organization achieve measurable results.</p>
+          <a href="contact.html" class="btn btn-primary">Get in Touch →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div style="flex: 1; min-width: 200px;">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">3N Consulting</div>
+        <p style="color: #6b7280;">Results. Delivered.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="thought-leadership.html">Meet Our Team</a>
+        <a href="toolkit.html">Our Toolkit</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb; color: #9ca3af;">
+      <p>&copy; 2024 3N Consulting. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
