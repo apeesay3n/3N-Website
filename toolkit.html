@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>David Hochman - Director, Strategy & Operations Practice | 3N Consulting</title>
+  <title>Our Toolkit - 3N Consulting</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     /* Inline CSS so this preview actually renders with layout */
@@ -88,12 +88,6 @@
       letter-spacing: -0.03em;
       margin-bottom: 0.5rem;
     }
-    .hero-subtitle {
-      font-size: 1.3rem;
-      color: #38bdf8;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
     .hero-body {
       font-size: 0.98rem;
       color: #d1d5db;
@@ -126,30 +120,87 @@
       line-height: 1.8;
     }
     
-    .content-block {
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .toolkit-card {
+      border-radius: 1.2rem;
+      border: 2px solid #38bdf8;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      padding: 2.5rem;
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.12);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .toolkit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent);
+      border-radius: 50%;
+      margin: -50px -50px 0 0;
+    }
+
+    .toolkit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.2);
+    }
+
+    .toolkit-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .toolkit-card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #020617;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .toolkit-card-description {
       color: #4b5563;
       font-size: 0.98rem;
       line-height: 1.8;
       margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
-    .bio-section {
+    .toolkit-highlights {
+      position: relative;
+      z-index: 1;
+    }
+
+    .toolkit-highlights ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toolkit-highlights li {
+      padding: 0.5rem 0 0.5rem 1.8rem;
       color: #4b5563;
-      font-size: 0.98rem;
-      line-height: 1.8;
-      max-width: 48rem;
-    }
-    
-    .bio-section p {
-      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      position: relative;
     }
 
-    .cta-section {
-      text-align: center;
-      padding: 2rem;
-      background: #f3f4f6;
-      border-radius: 1rem;
-      margin-top: 3rem;
+    .toolkit-highlights li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #38bdf8;
+      font-weight: 600;
     }
 
     .btn {
@@ -168,6 +219,14 @@
     }
     .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
     .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+
+    .cta-section {
+      text-align: center;
+      padding: 2rem;
+      background: #f3f4f6;
+      border-radius: 1rem;
+      margin-top: 3rem;
+    }
 
     .site-footer {
       border-top: 1px solid #e5e7eb;
@@ -195,11 +254,12 @@
       text-decoration: none;
     }
     .footer-links a:hover { text-decoration: underline; }
-    .footer-image { max-width: 150px; height: auto; }
 
     @media (max-width: 768px) {
       .hero { padding: 3rem 1.5rem 2rem; }
       .section { padding: 2rem 1.5rem; }
+      .grid-2 { grid-template-columns: minmax(0, 1fr); }
+      .toolkit-card { padding: 1.8rem; }
     }
   </style>
 </head>
@@ -217,8 +277,8 @@
         <a href="services.html">Service Lines</a>
         <a href="careers.html">Careers</a>
         <a href="contact.html">Contact Us</a>
-        <a href="thought-leadership.html" class="active">Meet Our Team</a>
-        <a href="toolkit.html">Our Toolkit</a>
+        <a href="thought-leadership.html">Meet Our Team</a>
+        <a href="toolkit.html" class="active">Our Toolkit</a>
         <a href="disclaimers.html">Disclaimers</a>
       </nav>
     </div>
@@ -229,69 +289,63 @@
     <section class="hero">
       <div class="hero-inner">
         <div>
-          <div class="hero-eyebrow">Our Team</div>
-          <h1 class="hero-title">David Hochman</h1>
-          <div class="hero-subtitle">Director, Strategy & Operations Practice</div>
+          <div class="hero-eyebrow">Strategic Consulting Methods</div>
+          <h1 class="hero-title">Our Toolkit</h1>
           <p class="hero-body">
-            30+ Years of Strategic Planning & Economic Development | Innovation Ecosystem Expert | University & Government Advisory
+            Proven methodologies and frameworks designed to drive organizational transformation, clarity, and measurable results. Explore the strategic approaches that guide our consulting engagements.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- BIOGRAPHY SECTION -->
+    <!-- TOOLKIT SECTION -->
     <section class="section section-alt">
       <div class="section-inner">
         <div class="section-header">
-          <h2 class="section-title">Biography</h2>
-        </div>
-        <div class="bio-section">
-          <p>
-            David Hochman is a Director at 3N Consulting LLC, bringing more than 30 years of experience in strategic planning, innovation-led economic development, and organizational performance improvement for universities, government agencies, and nonprofit foundations. He is widely recognized for his expertise in technology-based economic development, benchmarking, and strategic management, helping organizations design and implement policies that strengthen regional innovation ecosystems and research commercialization.
-          </p>
-          <p>
-            Mr. Hochman has advised state and regional economic-development agencies, public-private partnerships, and higher-education institutions nationwide. He currently serves as an Associate and Special Advisor with TEConomy Partners LLC, the nation's leading consulting practice for innovation-driven economic development, where he supports engagements for state governments, universities, and foundations.
+          <h2 class="section-title">Our Methodologies</h2>
+          <p class="section-subtitle">
+            At 3N Consulting, we leverage evidence-based frameworks to help organizations assess current state, align stakeholders, and accelerate results.
           </p>
         </div>
-      </div>
-    </section>
 
-    <!-- PROFESSIONAL EXPERIENCE SECTION -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="section-header">
-          <h2 class="section-title">Professional Experience</h2>
-        </div>
-        <div class="bio-section">
-          <p>
-            <strong>TEConomy Partners LLC:</strong> Mr. Hochman currently serves as an Associate and Special Advisor with TEConomy Partners LLC, the nation's leading consulting practice for innovation-driven economic development.
-          </p>
-          <p>
-            <strong>Battelle Memorial Institute:</strong> Previously, he was a Senior Principal Consultant at Battelle Memorial Institute's Technology Partnership Practice, where he led large-scale strategy and planning initiatives for science and technology-driven economies.
-          </p>
-          <p>
-            <strong>New Jersey Commission on Science and Technology:</strong> Earlier in his career, Mr. Hochman served as Deputy Director and Interim Executive Director of the New Jersey Commission on Science and Technology, managing $15 million in annual R&D grant programs and overseeing more than $125 million in research facility investments across the state.
-          </p>
-          <p>
-            <strong>Business Incubator Association of New York State:</strong> He also founded and served as the Executive Director of the Business Incubator Association of New York State, expanding it to nearly 40 member organizations operating more than 70 innovation facilities. His work has helped catalyze entrepreneurship, strengthen university-industry partnerships, and accelerate commercialization capacity nationwide.
-          </p>
-        </div>
-      </div>
-    </section>
+        <div class="grid-2">
+          <!-- O-RAM Card -->
+          <a href="o-ram.html" style="text-decoration: none; color: inherit;">
+            <div class="toolkit-card">
+              <div class="toolkit-card-icon">🔍</div>
+              <h3 class="toolkit-card-title">Organizational Readiness Assessment Methodology (O-RAM)</h3>
+              <p class="toolkit-card-description">
+                A comprehensive diagnostic framework that evaluates organizational capacity, alignment, and readiness for strategic initiatives and transformation efforts.
+              </p>
+              <div class="toolkit-highlights">
+                <ul>
+                  <li>Current-state organizational assessment</li>
+                  <li>Stakeholder alignment mapping</li>
+                  <li>Capacity and capability analysis</li>
+                  <li>Risk and readiness scoring</li>
+                  <li>Actionable improvement roadmap</li>
+                </ul>
+              </div>
+            </div>
+          </a>
 
-    <!-- EDUCATION & CREDENTIALS SECTION -->
-    <section class="section section-alt">
-      <div class="section-inner">
-        <div class="section-header">
-          <h2 class="section-title">Education & Academic Background</h2>
-        </div>
-        <div class="bio-section">
-          <p>
-            Mr. Hochman holds a <strong>Master of Business Administration in Finance</strong> from New York University's Stern School of Business and a <strong>Bachelor of Arts in History and Philosophy of Science</strong> from Princeton University.
-          </p>
-          <p>
-            A former adjunct professor at New York University's Wagner Graduate School of Public Administration, he has taught courses on strategic management and continues to be recognized for his lifelong commitment to advancing regional innovation and public-sector excellence.
-          </p>
+          <!-- AAA Card -->
+          <a href="aaa.html" style="text-decoration: none; color: inherit;">
+            <div class="toolkit-card">
+              <div class="toolkit-card-icon">⚡</div>
+              <h3 class="toolkit-card-title">Assess–Align–Accelerate (AAA)</h3>
+              <p class="toolkit-card-description">
+                A three-phase engagement model that systematically assesses challenges, aligns leadership and teams, and accelerates implementation of solutions and outcomes.
+              </p>
+              <div class="toolkit-highlights">
+                <ul>
+                  <li><strong>Assess:</strong> Deep analysis of organizational challenges and opportunities</li>
+                  <li><strong>Align:</strong> Build consensus and synchronize priorities across leadership</li>
+                  <li><strong>Accelerate:</strong> Execute solutions with speed and accountability</li>
+                </ul>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -300,9 +354,9 @@
     <section class="section">
       <div class="section-inner">
         <div class="cta-section">
-          <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Ready to Drive Strategic Growth?</h3>
-          <p style="margin-bottom: 1.5rem; color: #4b5563;">Let's discuss how strategic planning and innovation-driven development can strengthen your organization's competitive position.</p>
-          <a href="contact.html" class="btn btn-primary">Contact Us →</a>
+          <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Ready to Transform Your Organization?</h3>
+          <p style="margin-bottom: 1.5rem; color: #4b5563;">Let's discuss how our proven methodologies can drive clarity, alignment, and results for your initiative.</p>
+          <a href="contact.html" class="btn btn-primary">Start Your Assessment →</a>
         </div>
       </div>
     </section>
