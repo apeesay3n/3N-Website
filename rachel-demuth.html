@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rachel DeMuth - Director, Organizational Design Practice | 3N Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.7rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 48rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-header { margin-bottom: 2rem; }
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      color: #4b5563;
+      max-width: 48rem;
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+    
+    .content-block {
+      color: #4b5563;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .bio-section {
+      color: #4b5563;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      max-width: 48rem;
+    }
+    
+    .bio-section p {
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 2rem;
+      background: #f3f4f6;
+      border-radius: 1rem;
+      margin-top: 3rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+    .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-image { max-width: 150px; height: auto; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 3rem 1.5rem 2rem; }
+      .section { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html" class="active">Thought Leadership</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-eyebrow">Thought Leadership</div>
+          <h1 class="hero-title">Rachel DeMuth</h1>
+          <div class="hero-subtitle">Director, Organizational Design Practice</div>
+          <p class="hero-body">
+            Ph.D. in Industrial/Organizational Psychology | 20+ Years of Experience | Organization Design & Transformation Expert
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIOGRAPHY SECTION -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Biography</h2>
+        </div>
+        <div class="bio-section">
+          <p>
+            Dr. Rachel Frautschy Demuth serves as Director of the Organizational Design Practice at 3N Consulting LLC, where she leads the implementation of organizational design and transformation recommendations with a strong focus on change management, leadership alignment, and workforce readiness. With over 20 years of experience in organizational psychology, talent strategy, and human capital transformation, Dr. Demuth helps clients translate strategic intent into structure, culture, and behavior—ensuring sustainable performance through periods of rapid growth, merger integration, and strategic realignment.
+          </p>
+          <p>
+            Before joining 3N Consulting, Dr. Demuth founded Right, Left, Forward Design, LLC, a consulting firm specializing in organization design and transformation. In this capacity, she led design and change management engagements for Fortune 500 and high-growth companies, including multi-region oil and gas enterprises and national healthcare providers. Her portfolio includes work with The RBL Group, where she directed multiple organization design workstreams for a global transformation of an $18B firm, and Trilogy Health Services, where she streamlined HR field operations to improve service delivery and operational efficiency.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL EXPERIENCE SECTION -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Professional Experience</h2>
+        </div>
+        <div class="bio-section">
+          <p>
+            <strong>Humana:</strong> Previously, Dr. Demuth spent more than a decade at Humana, advancing to Director of Organization Effectiveness and Talent Management. There, she led enterprise-wide organization design, M&A integration, and culture alignment initiatives—including HR design and talent workstreams for Humana's $5.7B acquisition of Kindred at Home. She also spearheaded leadership development and succession planning programs that resulted in a 30% increase in diverse executive mobility within the first year.
+          </p>
+          <p>
+            <strong>Expertise:</strong> A recognized expert in organization effectiveness and human capital strategy, Dr. Demuth is known for combining systems thinking, design thinking, and data-driven methods to deliver organizational change that endures.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & CREDENTIALS SECTION -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Education & Credentials</h2>
+        </div>
+        <div class="bio-section">
+          <p>
+            Dr. Demuth holds a <strong>Ph.D. in Industrial/Organizational Psychology</strong> from Northern Illinois University, an <strong>M.A. in Industrial/Organizational Psychology</strong> from Northern Illinois University, and an <strong>M.S. in Psychology</strong> from the University of Wisconsin–River Falls.
+          </p>
+          <p>
+            She is a member of the <strong>Society for Industrial and Organizational Psychology (SIOP)</strong>, a leading professional organization for I/O psychologists and organizational consultants. Her academic foundation and professional certifications position her as a thought leader in organizational design, change management, and human capital strategy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="cta-section">
+          <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Ready to Transform Your Organization?</h3>
+          <p style="margin-bottom: 1.5rem; color: #4b5563;">Let's discuss how organizational design and change management can drive sustainable performance.</p>
+          <a href="contact.html" class="btn btn-primary">Contact Us →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div style="flex: 1; min-width: 200px;">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">3N Consulting</div>
+        <p style="color: #6b7280;">Results. Delivered.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="thought-leadership.html">Thought Leadership</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb; color: #9ca3af;">
+      <p>&copy; 2024 3N Consulting. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
