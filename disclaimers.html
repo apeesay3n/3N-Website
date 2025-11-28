@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimers - 3N Consulting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h1>3N Consulting</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Service Lines</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="thought-leadership.html">Thought Leadership</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Disclaimers</h1>
+            <p>Last Updated: <span id="updateDate"></span></p>
+        </div>
+    </section>
+
+    <!-- Disclaimers Content -->
+    <section class="disclaimers-section">
+        <div class="container">
+            <div class="disclaimer-content">
+                <h2>Legal Disclaimers</h2>
+
+                <h3>General Information</h3>
+                <p>The information provided on this website is for general informational purposes only. While 3N Consulting ("3N") strives to ensure that all information presented is accurate and up to date, no representation or warranty, express or implied, is made as to its completeness, accuracy, reliability, or suitability. Visitors use all information at their own risk.</p>
+
+                <h3>No Professional Advice</h3>
+                <p>Content on this site—including case studies, examples, or publications—does not constitute professional, legal, accounting, or consulting advice. Visitors should not act on information contained herein without obtaining appropriate professional counsel specific to their situation.</p>
+
+                <h3>Engagement of Services</h3>
+                <p>Viewing this website or contacting 3N Consulting through it does not create a client relationship. A formal written agreement signed by both parties is required before 3N Consulting undertakes any professional engagement.</p>
+
+                <h3>Third-Party Links</h3>
+                <p>This site may contain links to third-party websites. 3N Consulting does not control or endorse the content, accuracy, or policies of these external sites and is not responsible for any losses or damages arising from their use.</p>
+
+                <h3>Intellectual Property</h3>
+                <p>All content—including but not limited to text, graphics, logos, and documents—is the intellectual property of 3N Consulting unless otherwise stated. Reproduction or redistribution without prior written consent is strictly prohibited.</p>
+
+                <h3>Limitation of Liability</h3>
+                <p>In no event shall 3N Consulting, its officers, employees, or affiliates be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of access to or use of this website.</p>
+
+                <h3>Community Commitment</h3>
+                <p>3N Consulting is proud to serve public agencies and educational institutions in Maryland and beyond. References to past performance or client results are illustrative of experience only and do not guarantee future outcomes.</p>
+
+                <h3>Contact</h3>
+                <p>For questions regarding this disclaimer, please contact: <a href="mailto:info@3nconsultinggroup.com">info@3nconsultinggroup.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About 3N Consulting</h4>
+                    <p><strong>Results. Delivered.</strong></p>
+                    <p>Execution-focused consulting measured on outcomes.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>📞 (301) 723-7057</p>
+                    <p>📍 6710A Rockledge Drive<br>Bethesda, MD 20817</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="disclaimers.html">Disclaimers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 3N Consulting. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Set the current date in disclaimers
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('updateDate').textContent = today.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>
