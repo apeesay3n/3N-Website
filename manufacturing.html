@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manufacturing Planning Solution | 3N Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 3rem 1.5rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .hero-highlight { color: #38bdf8; }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 40rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-header { margin-bottom: 2rem; }
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .section-subtitle {
+      color: #4b5563;
+      max-width: 50rem;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 2rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: minmax(0,1fr); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px) {
+      .grid-3 { grid-template-columns: minmax(0,1fr); }
+    }
+
+    .card {
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.04);
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .card-body { font-size: 0.9rem; color: #4b5563; line-height: 1.7; }
+
+    .list-section {
+      margin-top: 1.5rem;
+    }
+    .list-section ul {
+      list-style-position: inside;
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .list-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+    .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: #111827; border-color: #d1d5db; }
+    .btn-ghost:hover { background: #e5e7eb; }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-image { max-width: 150px; height: auto; }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html">Thought Leadership</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">Productized Solution</div>
+        <h1 class="hero-title">
+          Manufacturing Planning <span class="hero-highlight">Solution</span>
+        </h1>
+        <p class="hero-body">
+          Aligning Production, Demand, and Profitability
+        </p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Transform Production Planning Into Performance</h2>
+        </div>
+        <p class="section-subtitle">
+          3N Consulting's Manufacturing Planning Solution helps manufacturers achieve the perfect balance between production efficiency, demand fulfillment, and inventory optimization. We bring together data analytics, operational strategy, and digital tools to transform production planning from a reactive scheduling function into a proactive, performance-driven capability.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our solution is built for manufacturers seeking to improve schedule reliability, reduce waste, and increase throughput—all while maintaining cost efficiency and customer satisfaction.
+        </p>
+      </div>
+    </section>
+
+    <!-- THE CHALLENGE -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">The Challenge</div>
+          <h2 class="section-title">Complexity in Modern Manufacturing</h2>
+        </div>
+        <p class="section-subtitle">
+          Manufacturers today face growing complexity: unpredictable demand, global supply constraints, labor shortages, and rising input costs. Without integrated visibility across production, inventory, and demand planning, even strong operations struggle with:
+        </p>
+        <div class="list-section">
+          <ul>
+            <li>Overproduction or stockouts due to inaccurate forecasts</li>
+            <li>Idle capacity and scheduling conflicts</li>
+            <li>Excess working capital tied up in inventory</li>
+            <li>Missed delivery commitments and customer dissatisfaction</li>
+          </ul>
+        </div>
+        <p class="section-subtitle" style="margin-top: 1.5rem;">
+          3N's Manufacturing Planning Solution addresses these challenges head-on, ensuring that production plans are aligned, adaptive, and analytics-driven.
+        </p>
+      </div>
+    </section>
+
+    <!-- OUR APPROACH -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Our Approach</div>
+          <h2 class="section-title">Structured, End-to-End Methodology</h2>
+        </div>
+        <p class="section-subtitle">
+          We apply a structured, end-to-end methodology that connects forecasting, scheduling, and inventory management into one cohesive system of performance. Our process includes:
+        </p>
+
+        <div class="grid-3" style="margin-top: 2rem;">
+          <article class="card">
+            <h3 class="card-title">Current-State Assessment</h3>
+            <p class="card-body">
+              Evaluate production planning, scheduling, and supply chain workflows across plants or business units.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Demand & Capacity Analysis</h3>
+            <p class="card-body">
+              Identify gaps between customer demand, production capacity, and resource allocation.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Scheduling Optimization</h3>
+            <p class="card-body">
+              Develop data-driven production schedules that balance throughput, equipment utilization, and lead times.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Inventory Optimization</h3>
+            <p class="card-body">
+              Analyze inventory turnover, safety stock levels, and material flow to minimize working capital without risking availability.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Digital Enablement</h3>
+            <p class="card-body">
+              Introduce planning dashboards, forecasting models, and AI-driven simulations to anticipate bottlenecks and improve decision-making.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Execution Roadmap</h3>
+            <p class="card-body">
+              Deliver a clear, actionable plan with quantifiable targets for cost savings, on-time delivery, and efficiency improvements.
+            </p>
+          </article>
+        </div>
+
+        <p class="section-subtitle" style="margin-top: 2rem;">
+          Every recommendation is grounded in data, discipline, and practicality—ensuring measurable gains across productivity, cost, and performance.
+        </p>
+      </div>
+    </section>
+
+    <!-- POWERED BY ANALYTICS -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Our Capabilities</div>
+          <h2 class="section-title">Powered by Analytics and Industry Insight</h2>
+        </div>
+        <p class="section-subtitle">
+          3N Consulting integrates advanced analytics and operational modeling into every planning engagement. By combining real-time production data with predictive forecasting and "what-if" simulation, our solution helps manufacturers respond faster to shifts in demand, supply disruptions, or resource constraints.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our consultants bring deep experience in industrial products, automotive, electronics, and consumer goods manufacturing, enabling us to adapt proven methods—such as Lean, Six Sigma, and constraint-based scheduling—to each client's unique environment.
+        </p>
+      </div>
+    </section>
+
+    <!-- RESULTS THAT MATTER -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Proven Impact</div>
+          <h2 class="section-title">Results That Matter</h2>
+        </div>
+        <p class="section-subtitle">
+          Organizations using 3N's Manufacturing Planning Solution achieve measurable operational and financial improvements, including:
+        </p>
+
+        <div class="grid-2" style="margin-top: 2rem;">
+          <article class="card">
+            <h3 class="card-title">10–25% Inventory Cost Reduction</h3>
+            <p class="card-body">
+              Through optimized holding levels and improved turnover.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Improved On-Time Delivery</h3>
+            <p class="card-body">
+              Performance improvement of 15–30% through better planning and scheduling.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Increased Production Throughput</h3>
+            <p class="card-body">
+              Higher utilization rates and reduced cycle times.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Faster Response Capability</h3>
+            <p class="card-body">
+              Shorter planning cycles and faster response to demand changes.
+            </p>
+          </article>
+        </div>
+
+        <p class="section-subtitle" style="margin-top: 2rem;">
+          The result: a production system that runs smarter, leaner, and more predictably—with improved ability to meet customer demand while protecting margins.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHY 3N -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Why 3N Consulting</div>
+          <h2 class="section-title">Strategy, Analytics, and Operational Excellence</h2>
+        </div>
+        <p class="section-subtitle">
+          3N's Manufacturing Planning Solution brings together strategy, analytics, and operational excellence. We help manufacturers move from siloed scheduling and reactive planning to a fully integrated, data-driven model that empowers decision-makers across production, supply chain, and sales.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our approach is pragmatic and execution-focused—delivering quick wins while laying the foundation for long-term digital transformation in manufacturing operations.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          At 3N Consulting, we don't just plan production—we engineer performance.
+        </p>
+
+        <div style="margin-top: 2rem;">
+          <a href="contact.html" class="btn btn-primary">Discuss your manufacturing planning →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div><strong>Results. Delivered.</strong> Execution-focused consulting measured on outcomes.</div>
+        <div style="margin-top:0.4rem; font-size:0.85rem;">
+          We build long-term partnerships, take ownership of outcomes, and practice frugality so savings flow to clients.
+        </div>
+        <div style="margin-top:0.75rem; font-size:0.85rem;">
+          <strong>Phone:</strong> (301) 723-7057<br>
+          <strong>Address:</strong> 6710A Rockledge Drive, Bethesda, MD 20817
+        </div>
+      </div>
+      <img src="images/img.png" alt="Footer Image" class="footer-image">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/company/3nconsultinggroup/" target="_blank">🔗 LinkedIn</a>
+        <a href="contact.html">Contact</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

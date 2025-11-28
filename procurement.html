@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Procurement Solution | 3N Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 3rem 1.5rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .hero-highlight { color: #38bdf8; }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 40rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-header { margin-bottom: 2rem; }
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .section-subtitle {
+      color: #4b5563;
+      max-width: 50rem;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 2rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: minmax(0,1fr); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px) {
+      .grid-3 { grid-template-columns: minmax(0,1fr); }
+    }
+
+    .card {
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.04);
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .card-body { font-size: 0.9rem; color: #4b5563; line-height: 1.7; }
+
+    .list-section {
+      margin-top: 1.5rem;
+    }
+    .list-section ul {
+      list-style-position: inside;
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .list-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+    .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: #111827; border-color: #d1d5db; }
+    .btn-ghost:hover { background: #e5e7eb; }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-image { max-width: 150px; height: auto; }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html">Thought Leadership</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">Productized Solution</div>
+        <h1 class="hero-title">
+          Procurement <span class="hero-highlight">Solution</span>
+        </h1>
+        <p class="hero-body">
+          Transforming Procurement into a Strategic Advantage
+        </p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">A Comprehensive, Evidence-Based Assessment</h2>
+        </div>
+        <p class="section-subtitle">
+          3N Consulting's Procurement Solution is a productized offering designed to help organizations achieve cost reduction, compliance, and operational efficiency through data-driven assessment and actionable improvement. We combine management consulting rigor with analytical precision to turn procurement from a transactional function into a strategic value driver.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our Procurement Solution delivers a comprehensive, evidence-based assessment of how your procurement organization performs today—and a clear roadmap for how it can perform better tomorrow.
+        </p>
+      </div>
+    </section>
+
+    <!-- THE CHALLENGE -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">The Challenge</div>
+          <h2 class="section-title">Procurement Under Pressure</h2>
+        </div>
+        <p class="section-subtitle">
+          Procurement functions today face mounting pressure to deliver more value with fewer resources. Leaders must balance fiscal responsibility, vendor transparency, policy compliance, and agility—all while managing fragmented processes and outdated systems.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Many organizations struggle to answer key questions:
+        </p>
+        <div class="list-section">
+          <ul>
+            <li>Are we spending efficiently and in compliance with policy?</li>
+            <li>Are we leveraging data to negotiate better contracts and supplier performance?</li>
+            <li>Where can we achieve savings without compromising service quality or timelines?</li>
+          </ul>
+        </div>
+        <p class="section-subtitle" style="margin-top: 1.5rem;">
+          3N's Procurement Solution provides those answers—clearly, quickly, and credibly.
+        </p>
+      </div>
+    </section>
+
+    <!-- OUR APPROACH -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Our Approach</div>
+          <h2 class="section-title">Structured, Data-Driven Framework</h2>
+        </div>
+        <p class="section-subtitle">
+          We apply a structured, data-driven framework that combines analytics, stakeholder engagement, and process evaluation to identify quick wins and long-term transformation opportunities.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our solution includes:
+        </p>
+
+        <div class="grid-3" style="margin-top: 2rem;">
+          <article class="card">
+            <h3 class="card-title">Diagnostic Assessment</h3>
+            <p class="card-body">
+              Comprehensive review of current-state procurement operations, organizational structure, technology enablement, and spend management.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Cost & Efficiency Analysis</h3>
+            <p class="card-body">
+              Quantitative evaluation of procurement spend, transaction cost, and cycle time to uncover opportunities for savings and process optimization.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Compliance & Policy Review</h3>
+            <p class="card-body">
+              Examination of existing procurement policies, approvals, and workflows to ensure adherence to internal controls and public-sector standards.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Strategic Sourcing & Category Insights</h3>
+            <p class="card-body">
+              Identification of high-impact sourcing categories and supplier consolidation opportunities.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Roadmap for Improvement</h3>
+            <p class="card-body">
+              Clear, prioritized recommendations that balance quick wins with long-term structural reform.
+            </p>
+          </article>
+        </div>
+
+        <p class="section-subtitle" style="margin-top: 2rem;">
+          Each engagement is grounded in evidence and execution—turning insight into measurable improvement.
+        </p>
+      </div>
+    </section>
+
+    <!-- POWERED BY DATA -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Our Capabilities</div>
+          <h2 class="section-title">Powered by Data and Experience</h2>
+        </div>
+        <p class="section-subtitle">
+          3N Consulting leverages our proprietary analytics frameworks and procurement dashboards to deliver real-time visibility into spend, performance, and compliance trends. By integrating analytics with process and policy review, we provide quantifiable savings potential and actionable implementation strategies.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our team brings decades of combined experience across public-sector, higher education, and private industry procurement environments, ensuring every recommendation is realistic, implementable, and tailored to the organization's mission and constraints.
+        </p>
+      </div>
+    </section>
+
+    <!-- RESULTS THAT MATTER -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Proven Impact</div>
+          <h2 class="section-title">Results That Matter</h2>
+        </div>
+        <p class="section-subtitle">
+          Our Procurement Solution has delivered measurable impact for clients across Maryland and beyond—helping them centralize procurement functions, identify redundant spend, improve vendor accountability, and strengthen policy compliance. In every case, the results are consistent:
+        </p>
+
+        <div class="grid-2" style="margin-top: 2rem;">
+          <article class="card">
+            <h3 class="card-title">Lower Total Cost of Procurement</h3>
+            <p class="card-body">
+              Reducing spend and administrative overhead through process optimization and strategic sourcing.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Reduced Cycle Times and Overhead</h3>
+            <p class="card-body">
+              Streamlining workflows and eliminating redundancy to accelerate procurement cycles.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Improved Transparency and Audit Readiness</h3>
+            <p class="card-body">
+              Strengthening governance and compliance through better visibility and documentation.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Enhanced Supplier Performance and Diversity</h3>
+            <p class="card-body">
+              Improving vendor accountability and expanding diverse supplier participation.
+            </p>
+          </article>
+        </div>
+
+        <p class="section-subtitle" style="margin-top: 2rem;">
+          Procurement becomes not just a compliance function, but a strategic enabler of performance and trust.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHY 3N -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Why 3N Consulting</div>
+          <h2 class="section-title">A Blended Approach to Transformation</h2>
+        </div>
+        <p class="section-subtitle">
+          3N's Procurement Solution stands apart because it blends strategic insight, operational know-how, and data analytics. We don't simply benchmark; we build capacity. We don't just identify issues; we design and deliver sustainable solutions.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our mission is to help organizations turn procurement into a competitive advantage—driving measurable savings, operational efficiency, and policy excellence.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          At 3N Consulting, Procurement is no longer a back-office function—it's a front-line driver of performance and integrity.
+        </p>
+
+        <div style="margin-top: 2rem;">
+          <a href="contact.html" class="btn btn-primary">Discuss your procurement initiative →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div><strong>Results. Delivered.</strong> Execution-focused consulting measured on outcomes.</div>
+        <div style="margin-top:0.4rem; font-size:0.85rem;">
+          We build long-term partnerships, take ownership of outcomes, and practice frugality so savings flow to clients.
+        </div>
+        <div style="margin-top:0.75rem; font-size:0.85rem;">
+          <strong>Phone:</strong> (301) 723-7057<br>
+          <strong>Address:</strong> 6710A Rockledge Drive, Bethesda, MD 20817
+        </div>
+      </div>
+      <img src="images/img.png" alt="Footer Image" class="footer-image">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/company/3nconsultinggroup/" target="_blank">🔗 LinkedIn</a>
+        <a href="contact.html">Contact</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

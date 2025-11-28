@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CIO Services | 3N Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 3rem 1.5rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .hero-highlight { color: #38bdf8; }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 40rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-header { margin-bottom: 2rem; }
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .section-subtitle {
+      color: #4b5563;
+      max-width: 50rem;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 2rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.5rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: minmax(0,1fr); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px) {
+      .grid-3 { grid-template-columns: minmax(0,1fr); }
+      .grid-4 { grid-template-columns: minmax(0,1fr); }
+    }
+
+    .card {
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.04);
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .card-body { font-size: 0.9rem; color: #4b5563; line-height: 1.7; }
+
+    .list-section {
+      margin-top: 1.5rem;
+    }
+    .list-section ul {
+      list-style-position: inside;
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .list-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+    .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: #111827; border-color: #d1d5db; }
+    .btn-ghost:hover { background: #e5e7eb; }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-image { max-width: 150px; height: auto; }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html">Thought Leadership</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">Productized Solution</div>
+        <h1 class="hero-title">
+          CIO <span class="hero-highlight">Services</span>
+        </h1>
+        <p class="hero-body">
+          Maximizing Value from Technology Investments
+        </p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Take Control of Your Technology Landscape</h2>
+        </div>
+        <p class="section-subtitle">
+          3N Consulting's CIO Services Solution helps organizations take control of their technology landscape—optimizing IT spend, rationalizing application portfolios, and improving the performance of development and maintenance operations.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our goal is simple: ensure that every technology dollar supports the mission, not just the infrastructure. By combining strategic assessment, financial analytics, and deep IT modernization expertise, 3N empowers technology leaders to make confident, data-driven decisions about where to invest, consolidate, or innovate.
+        </p>
+      </div>
+    </section>
+
+    <!-- THE CHALLENGE -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">The Challenge</div>
+          <h2 class="section-title">IT Complexity and Cost</h2>
+        </div>
+        <p class="section-subtitle">
+          Today's IT environment is more complex and costly than ever. Many organizations face:
+        </p>
+        <div class="list-section">
+          <ul>
+            <li>Escalating IT spend without clear linkage to business value</li>
+            <li>Redundant or underused applications driving unnecessary maintenance costs</li>
+            <li>Inefficient development and support models consuming valuable resources</li>
+            <li>Siloed technology decisions that hinder agility and innovation</li>
+          </ul>
+        </div>
+        <p class="section-subtitle" style="margin-top: 1.5rem;">
+          3N's CIO Services provide a structured, evidence-based approach to uncover inefficiencies, eliminate redundancies, and modernize operations—turning IT from a cost center into a strategic enabler.
+        </p>
+      </div>
+    </section>
+
+    <!-- OUR APPROACH -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Our Approach</div>
+          <h2 class="section-title">Comprehensive, Data-Driven Assessment</h2>
+        </div>
+        <p class="section-subtitle">
+          Our CIO Services Solution begins with a comprehensive, data-driven assessment that connects financial, operational, and technical insights into one unified view of IT performance. We focus on four key dimensions:
+        </p>
+
+        <div class="grid-2" style="margin-top: 2rem;">
+          <article class="card">
+            <h3 class="card-title">IT Spend Assessment</h3>
+            <p class="card-body">
+              Analyze total cost of ownership (TCO) across infrastructure, applications, and services to identify immediate cost reduction opportunities.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Application Portfolio Analysis</h3>
+            <p class="card-body">
+              Evaluate the performance, utilization, and value contribution of each system across the enterprise.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Application Rationalization</h3>
+            <p class="card-body">
+              Streamline redundant or outdated systems and prioritize modernization initiatives that yield the highest ROI.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Development & Maintenance Optimization</h3>
+            <p class="card-body">
+              Assess development productivity, vendor performance, and resource allocation to improve delivery speed and quality.
+            </p>
+          </article>
+        </div>
+
+        <p class="section-subtitle" style="margin-top: 2rem;">
+          The result is a clear, actionable roadmap that aligns IT investments with strategic priorities while improving efficiency and accountability.
+        </p>
+      </div>
+    </section>
+
+    <!-- POWERED BY ANALYTICS -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Our Capabilities</div>
+          <h2 class="section-title">Powered by Analytics and Modernization Expertise</h2>
+        </div>
+        <p class="section-subtitle">
+          3N leverages proven frameworks, including Technology Value Mapping, Application Health Scoring, and Total Cost Diagnostics, to provide a fact-based foundation for every recommendation. Our consultants combine experience in enterprise IT governance, financial modeling, and digital transformation to ensure that CIOs have the insights needed to make high-impact decisions quickly.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our team has supported clients across public sector agencies, higher education, and Fortune 500 enterprises, helping them right-size their technology portfolios, strengthen vendor management, and unlock millions in operational savings.
+        </p>
+      </div>
+    </section>
+
+    <!-- RESULTS THAT MATTER -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Proven Impact</div>
+          <h2 class="section-title">Results That Matter</h2>
+        </div>
+        <p class="section-subtitle">
+          Organizations using 3N's CIO Services Solution achieve measurable results, including:
+        </p>
+
+        <div class="grid-2" style="margin-top: 2rem;">
+          <article class="card">
+            <h3 class="card-title">10–30% Reduction in IT Spend</h3>
+            <p class="card-body">
+              Through rationalization and sourcing optimization.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Streamlined Application Portfolios</h3>
+            <p class="card-body">
+              Reducing complexity and maintenance overhead.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Improved Time-to-Market</h3>
+            <p class="card-body">
+              For new digital products and enhancements.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Greater Strategic Alignment</h3>
+            <p class="card-body">
+              Between IT operations and business strategy.
+            </p>
+          </article>
+        </div>
+
+        <p class="section-subtitle" style="margin-top: 2rem;">
+          Each engagement delivers tangible value—helping CIOs build credibility with business leadership and deliver technology that performs with purpose.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHY 3N -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Why 3N Consulting</div>
+          <h2 class="section-title">Clarity, Control, and Measurable Impact</h2>
+        </div>
+        <p class="section-subtitle">
+          3N's CIO Services are designed for leaders who demand clarity, control, and measurable impact from their technology investments. We go beyond benchmarking—we build a foundation for modernization that is both strategic and executable.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Our approach bridges the gap between business and IT, combining consulting rigor with technical depth to deliver sustained results.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          At 3N Consulting, CIO Services means smarter spend, simpler portfolios, and stronger performance.
+        </p>
+
+        <div style="margin-top: 2rem;">
+          <a href="contact.html" class="btn btn-primary">Discuss your CIO strategy →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div><strong>Results. Delivered.</strong> Execution-focused consulting measured on outcomes.</div>
+        <div style="margin-top:0.4rem; font-size:0.85rem;">
+          We build long-term partnerships, take ownership of outcomes, and practice frugality so savings flow to clients.
+        </div>
+        <div style="margin-top:0.75rem; font-size:0.85rem;">
+          <strong>Phone:</strong> (301) 723-7057<br>
+          <strong>Address:</strong> 6710A Rockledge Drive, Bethesda, MD 20817
+        </div>
+      </div>
+      <img src="images/img.png" alt="Footer Image" class="footer-image">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/company/3nconsultinggroup/" target="_blank">🔗 LinkedIn</a>
+        <a href="contact.html">Contact</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
