@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Analytics | 3N Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Inline CSS so this preview actually renders with layout */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .site-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    .main { flex: 1; }
+
+    .site-header {
+      background: #020617;
+      color: #e5e7eb;
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand-tagline { font-size: 0.75rem; color: #9ca3af; }
+    .brand-logo { height: 70px; width: auto; max-width: 250px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { background: #111827; }
+    .nav-links a.active { background: #e5e7eb; color: #020617; }
+    .nav-toggle { display: none; border: none; background: transparent; color: #e5e7eb; font-size: 1.3rem; }
+
+    @media (max-width: 768px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-toggle { display: block; margin-left: auto; }
+      .nav-links { width: 100%; display: none; padding-top: 0.5rem; }
+      .nav-links.show { display: flex; }
+    }
+
+    .hero {
+      padding: 3rem 1.5rem;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .hero-highlight { color: #38bdf8; }
+    .hero-body {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 40rem;
+    }
+
+    .section { padding: 3rem 1.5rem; }
+    .section-alt { background: #f3f4f6; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-header { margin-bottom: 2rem; }
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .section-subtitle {
+      color: #4b5563;
+      max-width: 50rem;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 2rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: minmax(0,1fr); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px) {
+      .grid-3 { grid-template-columns: minmax(0,1fr); }
+    }
+
+    .card {
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.04);
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .card-body { font-size: 0.9rem; color: #4b5563; line-height: 1.7; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+    .btn-primary { background: #38bdf8; color: #020617; border-color: #0ea5e9; }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: #111827; border-color: #d1d5db; }
+    .btn-ghost:hover { background: #e5e7eb; }
+
+    .site-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-image { max-width: 150px; height: auto; }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/3nlogo.png" alt="3N Consulting Logo" style="height: 70px; width: auto; max-width: 250px;">
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="thought-leadership.html">Thought Leadership</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">Core Capability</div>
+        <h1 class="hero-title">
+          Data <span class="hero-highlight">Analytics</span>
+        </h1>
+        <p class="hero-body">
+          Frameworks & dashboards that uncover patterns and predict trends.
+        </p>
+      </div>
+    </section>
+
+    <!-- UNDERSTANDING DATA ANALYTICS -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Understanding Data Analytics</div>
+          <h2 class="section-title">What Data Analytics Really Means</h2>
+        </div>
+        <p class="section-subtitle" style="max-width: 50rem;">
+          Data Analytics is the disciplined use of information to understand how organizations operate, perform, and serve their stakeholders. It goes beyond dashboards and reports—integrating business intelligence, automation, and predictive modeling to help decision-makers see not only what is happening, but why it is happening, and what to do next.
+        </p>
+        <p class="section-subtitle" style="max-width: 50rem; margin-top: 1rem;">
+          At 3N Consulting, Data Analytics combines management consulting rigor with advanced data science to connect strategy, performance, and technology. Our work helps organizations translate complex data into clear, actionable insights that drive smarter, faster, and more equitable decisions.
+        </p>
+      </div>
+    </section>
+
+    <!-- DRIVING MEASURABLE IMPROVEMENT -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Key Drivers</div>
+          <h2 class="section-title">Driving Measurable Improvement</h2>
+          <p class="section-subtitle">
+            Effective data analytics enables organizations to measure performance, improve outcomes, and maintain operational efficiency.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3 class="card-title">Measure Performance</h3>
+            <p class="card-body">
+              We help clients establish KPIs and metrics aligned with their mission and goals, ensuring every analytic effort drives measurable impact.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Improve Performance</h3>
+            <p class="card-body">
+              Through trend analysis, predictive modeling, and performance dashboards, we identify bottlenecks, inefficiencies, and opportunities for innovation.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Maintain Efficiency</h3>
+            <p class="card-body">
+              Our frameworks embed data governance and automation, ensuring that analytic systems evolve with organizational needs—not against them.
+            </p>
+          </article>
+        </div>
+
+        <p class="section-subtitle" style="margin-top: 2rem;">
+          Whether improving procurement processes, modernizing grants management, or optimizing workforce planning, our analytics-driven approach ensures that every recommendation is grounded in evidence and results.
+        </p>
+      </div>
+    </section>
+
+    <!-- TRANSFORMING OPERATIONS -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Real-World Impact</div>
+          <h2 class="section-title">Transforming Operations Through Insight</h2>
+        </div>
+        <p class="section-subtitle">
+          3N Consulting has used Data Analytics to help complex organizations modernize operations, increase transparency, and strengthen decision-making. In one case, we applied data modeling and visualization to evaluate purchasing trends and identify opportunities for centralization—resulting in improved efficiency and stronger resource stewardship. In another, we developed dashboards and statistical models that enabled leadership to forecast outcomes and prioritize initiatives with the greatest community impact.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          Across engagements, the result is consistent: empowered decision-makers, data-informed strategies, and improved service delivery.
+        </p>
+      </div>
+    </section>
+
+    <!-- DATA ANALYTICS AND AI -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">The Future of Analytics</div>
+          <h2 class="section-title">Data Analytics in the Age of AI</h2>
+        </div>
+        <p class="section-subtitle">
+          Today, Data Analytics is inseparable from Artificial Intelligence. 3N Consulting helps organizations evolve from descriptive analytics ("what happened") to predictive and prescriptive analytics ("what will happen" and "what should we do next"). We integrate AI-driven pattern recognition, natural language processing, and intelligent automation to reduce manual workload and enhance human decision-making.
+        </p>
+        <p class="section-subtitle" style="margin-top: 1rem;">
+          As AI continues to redefine the modern enterprise, 3N ensures that analytics are implemented responsibly, strategically, and sustainably—improving efficiency, equity, and mission impact.
+        </p>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-kicker">Our Expertise</div>
+          <h2 class="section-title">3N's Capabilities in Data Analytics</h2>
+          <p class="section-subtitle">
+            3N Consulting's Data Analytics service line includes:
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3 class="card-title">Data Strategy &amp; Governance</h3>
+            <p class="card-body">
+              Building enterprise frameworks for data integrity, accessibility, and quality assurance.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Performance Analytics</h3>
+            <p class="card-body">
+              Designing KPIs, dashboards, and predictive tools that track progress toward strategic goals.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Advanced Data Science &amp; AI Integration</h3>
+            <p class="card-body">
+              Applying machine learning, automation, and statistical modeling to optimize forecasting and decision-making.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Cloud &amp; Data Infrastructure Modernization</h3>
+            <p class="card-body">
+              Leveraging AWS, Power BI, Tableau, and Python-based analytics environments for scalable, secure insight delivery.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Human-Centered Insights</h3>
+            <p class="card-body">
+              Translating complex analytics into meaningful narratives for policymakers, administrators, and executives.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Multidisciplinary Expertise</h3>
+            <p class="card-body">
+              Deep expertise in analytics, IT modernization, and organizational strategy—helping clients move from data to decisions, and from insight to impact.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div><strong>Results. Delivered.</strong> Execution-focused consulting measured on outcomes.</div>
+        <div style="margin-top:0.4rem; font-size:0.85rem;">
+          We build long-term partnerships, take ownership of outcomes, and practice frugality so savings flow to clients.
+        </div>
+        <div style="margin-top:0.75rem; font-size:0.85rem;">
+          <strong>Phone:</strong> (301) 723-7057<br>
+          <strong>Address:</strong> 6710A Rockledge Drive, Bethesda, MD 20817
+        </div>
+      </div>
+      <img src="images/img.png" alt="Footer Image" class="footer-image">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/company/3nconsultinggroup/" target="_blank">🔗 LinkedIn</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Service Lines</a>
+        <a href="careers.html">Careers</a>
+        <a href="thought-leadership.html">Thought Leadership</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="disclaimers.html">Disclaimers</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('show');
+    });
+  }
+</script>
+</body>
+</html>

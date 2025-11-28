@@ -5,11 +5,11 @@
 }
 
 :root {
-    --primary-color: #003366;
-    --secondary-color: #0066cc;
-    --accent-color: #ff6b35;
-    --text-dark: #1a1a1a;
-    --text-light: #666666;
+    --primary-color: #1e5a96;
+    --secondary-color: #0d47a1;
+    --accent-color: #000000;
+    --text-dark: #000000;
+    --text-light: #333333;
     --bg-light: #f5f5f5;
     --bg-white: #ffffff;
     --border-color: #e0e0e0;
@@ -57,6 +57,12 @@ body {
     letter-spacing: 1px;
 }
 
+.logo-img {
+    height: 50px;
+    width: auto;
+    max-width: 200px;
+}
+
 .nav-links {
     display: flex;
     list-style: none;
@@ -71,12 +77,12 @@ body {
 }
 
 .nav-links a:hover {
-    color: var(--accent-color);
+    color: #64b5f6;
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #004080 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0d47a1 100%);
     color: var(--bg-white);
     padding: 80px 20px;
     min-height: 600px;
@@ -101,7 +107,7 @@ body {
 }
 
 .hero-title .highlight {
-    color: var(--accent-color);
+    color: #64b5f6;
 }
 
 .hero-subtitle {
@@ -120,7 +126,7 @@ body {
 
 .cta-button {
     display: inline-block;
-    background-color: var(--accent-color);
+    background-color: #0d47a1;
     color: var(--bg-white);
     padding: 14px 40px;
     text-decoration: none;
@@ -130,7 +136,7 @@ body {
 }
 
 .cta-button:hover {
-    background-color: #ff5722;
+    background-color: #1565c0;
     transform: translateY(-2px);
 }
 
@@ -154,7 +160,7 @@ body {
 .animation-box {
     width: 200px;
     height: 200px;
-    background-color: var(--accent-color);
+    background-color: #0d47a1;
     border-radius: 8px;
     animation: float 6s ease-in-out infinite;
 }
@@ -392,7 +398,7 @@ body {
 }
 
 .cta-link:hover {
-    color: var(--accent-color);
+    color: #0d47a1;
 }
 
 /* Capabilities Section */
@@ -481,7 +487,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    border-top: 4px solid var(--accent-color);
+    border-top: 4px solid #1e5a96;
 }
 
 .solution-card:hover {
@@ -500,7 +506,7 @@ body {
 }
 
 .solution-card:hover h3 a {
-    color: var(--accent-color);
+    color: #0d47a1;
 }
 
 .solution-card p {
@@ -535,7 +541,7 @@ body {
 }
 
 .footer-section a {
-    color: var(--accent-color);
+    color: #64b5f6;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -571,7 +577,7 @@ body {
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #004080 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0d47a1 100%);
     color: var(--bg-white);
     padding: 60px 20px;
     text-align: center;
@@ -625,7 +631,7 @@ body {
 }
 
 .info-item a:hover {
-    color: var(--accent-color);
+    color: #0d47a1;
 }
 
 /* Contact Form */
@@ -690,7 +696,7 @@ body {
     background-color: var(--bg-light);
     padding: 30px;
     border-radius: 8px;
-    border-left: 4px solid var(--accent-color);
+    border-left: 4px solid #0d47a1;
     margin: 30px 0;
 }
 
@@ -705,7 +711,7 @@ body {
 }
 
 .email-link:hover {
-    color: var(--accent-color);
+    color: #0d47a1;
 }
 
 .why-join {
@@ -1003,7 +1009,7 @@ body {
     content: "→";
     position: absolute;
     left: 0;
-    color: var(--accent-color);
+    color: #0d47a1;
     font-weight: bold;
 }
 
